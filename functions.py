@@ -60,11 +60,11 @@ def cadastro_cpf():
                 while True:
                     cpf_ja_existente = False
                     try:
-                        with open('dados.txt', 'r') as dados_usuario:
-                            linhas = dados.readlines()
+                        with open('dados.txt', 'r') as dados_usuarios:
+                            linhas = dados_usuarios.readlines()
                             break
                     except FileNotFoundError:
-                        with open('dados.txt', 'w') as dados_usuario:
+                        with open('dados.txt', 'w'):
                             continue
                 for linha in linhas:
                     try:
@@ -100,8 +100,8 @@ def cadastro_usuario(tipo):
         usuario = User(cpf, senha, nome)
     elif tipo == 'VENDEDOR':
         usuario = Vendedor(cpf, senha, nome)
-    with open('dados.txt', 'a') as dados_usuario:
-        dados_usuario.write(f'{usuario.chamar_dados()}\n')
+    with open('dados.txt', 'a') as dados_usuarios:
+        dados_usuarios.write(f'{usuario.chamar_dados()}\n')
 
 
 def cadastrar_produto(vendedor):
