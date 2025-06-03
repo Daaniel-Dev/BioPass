@@ -60,11 +60,11 @@ def cadastro_cpf():
                 while True:
                     cpf_ja_existente = False
                     try:
-                        with open('dados.txt', 'r') as dados:
+                        with open('dados.txt', 'r') as dados_usuario:
                             linhas = dados.readlines()
                             break
                     except FileNotFoundError:
-                        with open('dados.txt', 'w') as dados:
+                        with open('dados.txt', 'w') as dados_usuario:
                             continue
                 for linha in linhas:
                     try:
