@@ -1,46 +1,33 @@
 from functions import *
 
-titulo('Ecora - Sua plataforma de produtos sustentáveis!')
-produtos_gerais = []
+espacos = 65
+titulo('Ecora - Seu marketplace de produtos sustentáveis!', espacos=espacos)
 while True:
-    opcao = menu(
-        ['Login (em breve)', 'Cadastrar', 'Ver Produtos e Comprar', 'Sobre Nós', 'Depoimentos', 'Vídeo Educacional', 'Sair'],
-        'Escolha uma opção:'
-    )
-
-    if opcao == 0:
-        print('Função de login em desenvolvimento...')
-
-    elif opcao == 1:
-        tipo = menu(['Cliente', 'Vendedor'], 'Você quer se cadastrar como:')
-        if tipo == 0:
-            cliente = cadastro_usuario('CLIENTE')
-            print('Cliente cadastrado com sucesso!')
-        else:
-            vendedor = cadastro_usuario('VENDEDOR')
-            print('Vendedor cadastrado com sucesso!')
-            while True:
-                acao = menu(['Cadastrar Produto', 'Listar Meus Produtos', 'Sair'], 'Escolha uma ação:')
-                if acao == 0:
-                    produto = cadastrar_produto(vendedor)
-                    produtos_gerais.append(produto)
-                elif acao == 1:
-                    listar_produtos_disponiveis(vendedor.produtos)
-                else:
-                    break
-
-    elif opcao == 2:
-        comprar_produto(produtos_gerais)
-
-    elif opcao == 3:
-        sobre()
-
-    elif opcao == 4:
-        funcao_depoimentos()
-
-    elif opcao == 5:
-        video_educacional()
-
-    elif opcao == 6:
+    opcao1 = menu(['Login', 'Cadastrar', 'Sair'])
+    if opcao1 == 0:
+        usuario = login_usuario()
+        if usuario == 'Voltar':
+            continue
+        titulo(f'Seja bem vindo, {usuario['nome']}!', '-', espacos)
+        while True:
+            print('-' * espacos)
+            opcao2 = menu(['Ver produtos disponíveis', 'Comprar produto', 'Cadastrar produto', 'Depoimentos',
+                      'Vídeos educacionais', 'Finalizar sessão'])
+            if opcao2 == 0:
+                listar_produtos_disponiveis()
+            elif opcao2 == 1:
+                comprar_produto()
+            elif opcao2 == 2:
+                cadastrar_produto(usuario)
+            elif opcao2 == 3:
+                funcao_depoimentos()
+            elif opcao2 == 4:
+                video_educacional()
+            elif opcao2 == 5:
+                print('Finalizando sessão...')
+                break
+    elif opcao1 == 1:
+        usuario = cadastro_usuario()
+    elif opcao1 == 2:
         print('Obrigado por usar nosso app.')
         break
