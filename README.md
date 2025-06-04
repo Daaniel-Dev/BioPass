@@ -1,60 +1,113 @@
-# Ecora
+# Ecora - Seu Marketplace Sustentável
 
-## Descrição
-**Ecora** é uma plataforma desenvolvida com o objetivo de promover a compra e venda de **produtos sustentáveis**. Este projeto oferece uma experiência simples e divertida, permitindo que clientes e vendedores interajam em um marketplace dedicado à sustentabilidade. A plataforma incentiva tanto grandes quanto pequenos vendedores a divulgarem seus produtos, além de oferecer uma seção educativa que auxilia os usuários no descarte ou reutilização de materiais de forma consciente.
-
----
-
-## Funcionalidades
-
-1. **Login** *(em breve)*  
-   Uma funcionalidade em desenvolvimento que permitirá aos usuários acessarem suas contas pessoais.
-
-2. **Cadastro (Cliente e Vendedor)**  
-   Os usuários podem se cadastrar no sistema como:
-   - **Cliente**: Para adquirir produtos.
-   - **Vendedor**: Para divulgar seus produtos de forma prática.  
-
-3. **Gerenciamento de Produtos** *(para vendedores)*  
-   - Cadastrar novos produtos.
-   - Listar e visualizar produtos já cadastrados.
-
-4. **Compra de Produtos**  
-   Os clientes podem visualizar os produtos disponíveis, consultar os detalhes e realizar a compra de forma prática.
-
-5. **Sobre Nós**  
-   Saiba mais sobre a missão da **Ecora** e como oferecemos suporte para nossa comunidade.
-
-6. **Depoimentos**  
-   - Adicione depoimentos sobre sua experiência na plataforma.  
-   - Leia comentários de outros usuários.  
-
-7. **Vídeos Educacionais**  
-   - Adicione links de vídeos educativos sobre sustentabilidade.  
-   - Consulte vídeos já cadastrados para aprender mais sobre boas práticas.  
+Bem-vindo ao **Ecora**, um aplicativo de marketplace focado na sustentabilidade, ajudando vendedores e consumidores a se conectarem de forma consciente.
 
 ---
 
-## Como Funciona?
+## 📖 Sobre o Projeto
 
-- ### Clientes
-  - Faça o cadastro.
-  - Navegue pelos produtos disponíveis.
-  - Escolha o produto desejado e finalize a compra facilmente.  
+O objetivo do **Ecora** é proporcionar um ambiente seguro e simples onde pequenos e grandes vendedores possam divulgar e vender seus produtos de forma sustentável. Oferece funcionalidades para:
 
-- ### Vendedores
-  - Cadastre-se como vendedor.
-  - Adicione seus produtos (incluindo vídeos de demonstração, caso aplicável).
-  - Gerencie seus itens e aguarde novos pedidos.
+- Cadastrar produtos sustentáveis.
+- Comprar produtos disponibilizados na plataforma.
+- Adicionar vídeos educativos sobre reutilização ou descarte consciente.
+- Deixar depoimentos e compartilhar experiências.
+- Aprender mais sobre sustentabilidade com nossa seção de vídeos educacionais.
 
 ---
 
-## Estrutura do Projeto 
+## 🚀 Funcionalidades
 
-- **`main.py`**: Arquivo principal que executa o programa.  
-- **`functions.py`**: Contém funções de apoio usadas ao longo do sistema, como menus, cadastro de produtos e funcionalidades secundárias (depoimentos, vídeos educacionais, etc.).  
-- **`classes.py`**: Contém as definições de classes (Usuários, Vendedores e Produtos) usadas para organizar os dados.  
-- **`dados.txt`**: Armazena informações de usuários registrados.
+### 👤 **Usuários**
+- **Cadastro de Usuários**: Realizado usando CPF, nome e senha. A validação do CPF é feita para garantir autenticidade.
+- **Login**: Acesso seguro com CPF e senha.
+
+### 🛍️ **Produtos**
+- **Cadastro de Produtos**: 
+  - Nome
+  - Descrição
+  - Preço
+  - Quantidade disponível
+  - Link de vídeo (opcional)
+- **Listagem de Produtos Disponíveis**: Consulte produtos cadastrados na plataforma.
+- **Compra de Produtos**: Sistema simples para adquirir produtos, simulando uma transação com cartão.
+
+### ✨ **Recursos Extras**
+- **Depoimentos**: Adicione feedback e veja o que outros usuários pensam sobre a plataforma.
+- **Vídeos Educacionais**:
+  - Adicione links de vídeos para promover práticas sustentáveis.
+  - Consulte os links adicionados.
 
 ---
 
+## 💻 Tecnologias Utilizadas
+
+- **Python**: Lógica principal do programa.
+- **JSON**: Armazenamento de dados de usuários, produtos, depoimentos, e vídeos de forma persistente.
+
+---
+
+## 📋 Pré-requisitos
+
+Antes de executar o programa, garanta que você tenha:
+- **Python 3.13** ou superior instalado.
+- Biblioteca Python padrão de entrada/saída (como `json`).
+
+---
+
+## ▶️ Como Executar
+
+1. Clone ou baixe o repositório para sua máquina.
+2. Certifique-se de ter os arquivos `main.py`, `functions.py` e `classes.py` no mesmo diretório.
+3. Execute o aplicativo a partir do arquivo `main.py`:
+
+```shell script
+python main.py
+```
+
+
+4. Siga as instruções interativas no terminal para explorar o sistema.
+
+---
+
+## 🗂 Estrutura
+
+- **main.py**: Arquivo principal que inicia o programa e conecta as funcionalidades.
+- **functions.py**: Contém as principais funções do programa, como menus, cadastro, manipulação de arquivos e lógica de funcionamento.
+- **classes.py**: Define as classes `User` (usuário) e `Produto` (produto), que estruturam os dados no sistema.
+- **Arquivos JSON**:
+  - `dados.json`: Armazena dados de usuários cadastrados.
+  - `produtos.json`: Contém informações dos produtos cadastrados.
+  - `depoimentos.json`: Registra depoimentos dos usuários.
+  - `video_educacional.json`: Lista de links de vídeos educacionais.
+
+---
+
+## 🔒 Segurança
+
+- Validação de dados como CPF e senha.
+- Simulação de transações seguras.
+- Armazenamento de dados estruturados em arquivos JSON, permitindo integração e persistência.
+
+---
+
+## 🎯 Melhorias Futuras
+- Implementar uma interface gráfica para maior acessibilidade.
+- Adicionar uma API para acessar os produtos e usuários remotamente.
+- Melhorar a encriptação dos dados dos usuários para maior segurança.
+
+---
+
+## 🙌 Contribuição
+
+Gostou do projeto? Sinta-se à vontade para sugerir melhorias ou reportar problemas.
+
+---
+
+## 📞 Contato
+
+Para dúvidas ou sugestões, entre em contato com os desenvolvedores. Estamos abertos a feedbacks para melhorar a experiência sustentável de nossos usuários.
+
+---
+
+**Obrigado por utilizar o Ecora! Vamos juntos construir um futuro mais sustentável. 🌱**
