@@ -111,19 +111,48 @@ def cadastro_usuario():
 
 
 def cadastrar_produto(usuario):
-    nome = input('Nome do produto: ').strip().title()
-    descricao = input('Descrição do produto: ').strip()
-    preco = float(input('Preço do produto (R$): ').replace(',', '.'))
-    quantidade = int(input('Unidades do produto: '))
-    url_video = input('Link do vídeo (opcional): ').strip()
-    if not url_video:
-        url_video = 'Não informado'
+    while True:
+        nome = input('Nome do produto: ').strip().title()
+        pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou digitar outro nome?')
+        if pergunta == 1:
+            continue
+        descricao = input('Descrição do produto: ').strip()
+        pergunta = menu(['CONTINUAR', 'DIGITAR OUTRA'], 'Deseja continuar ou digitar outra descrição?')
+        if pergunta == 1:
+            continue
+        else:
+            break
+    while True:
+        try:
+            preco = float(input('Preço do produto (R$): ').replace(',', '.'))
+            pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO', 'Deseja continuar ou digitar outro preço?'])
+            if pergunta == 1:
+                continue
+            else:
+                break
+        except ValueError:
+            print('\033[31;1mValor inválido. Tente novamente\033[m')
+    while True:
+        try:
+            quantidade = int(input('Unidades do produto: '))
+        except ValueError:
+            print('\033[31;Valor inválido. Tente novamente\033[m')
+    while True:
+        url_video = input('Link do vídeo (opcional): ').strip()
+        if not url_video:
+            url_video = 'Não informado'
+        else:
+            pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou informar outro URL?')
+            if pergunta == 1:
+                continue
+            else:
+                break
     produto = Produto(usuario['cpf'], usuario['nome'], nome, preco, quantidade, descricao, url_video)
     dados_produto = abrir_arquivo_json('produtos')
     dados_produto.append(produto.dados())
     with open(f'produtos.json', 'w') as arquivo:
         json.dump(dados_produto, arquivo, indent=2)
-    print('\033[32;1mProduto cadastrado com sucesso!\033[m')
+    print('\033[32;1mProduto cadastrado com sucesso!\033[m')    
 
 
 def listar_produtos_disponiveis():
