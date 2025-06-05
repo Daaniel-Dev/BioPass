@@ -21,7 +21,3 @@ class Produto:
                 "nome do produto": self.nome_produto, "preço": self.preco,
                 "descrição": self.descricao, "quantidade": self.quantidade, "url": self.url_video}
         self.url_video = url_video
-
-    def __str__(self):
-        return (f'Produto: {self.nome}\nDescrição: {self.descricao}\nPreço: R${self.preco:.2f}\nVídeo: '
-                f'{self.url_video if self.url_video else "Não informado"}')
