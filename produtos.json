@@ -1,0 +1,26 @@
+[
+ [
+  {
+   "cpf": "15766040474",
+   "nome do vendedor": "Daniel",
+   "id": 1,
+   "nome do produto": "Tenis",
+   "pre\u00e7o": 50.0,
+   "descri\u00e7\u00e3o": "tenis",
+   "quantidade": 10,
+   "url": "N\u00e3o informado"
+  }
+ ],
+ [
+  {
+   "cpf": "15766040474",
+   "nome do vendedor": "Daniel",
+   "id": 2,
+   "nome do produto": "Caneta",
+   "pre\u00e7o": 30.0,
+   "descri\u00e7\u00e3o": "caneta",
+   "quantidade": 19,
+   "url": "N\u00e3o informado"
+  }
+ ]
+]
