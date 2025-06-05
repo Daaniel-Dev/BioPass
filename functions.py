@@ -110,6 +110,7 @@ def cadastro_usuario():
     print('\033[32;1mCadastro concluído com sucesso!\033[m')
 
 
+# Falta criar uma função para cada cadastro para deixar o código mais limpo
 def cadastrar_produto(usuario):
     while True:
         nome = input('Nome do produto: ').strip().title()
