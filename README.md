@@ -83,31 +83,4 @@ python main.py
 
 ---
 
-## 🔒 Segurança
-
-- Validação de dados como CPF e senha.
-- Simulação de transações seguras.
-- Armazenamento de dados estruturados em arquivos JSON, permitindo integração e persistência.
-
----
-
-## 🎯 Melhorias Futuras
-- Implementar uma interface gráfica para maior acessibilidade.
-- Adicionar uma API para acessar os produtos e usuários remotamente.
-- Melhorar a encriptação dos dados dos usuários para maior segurança.
-
----
-
-## 🙌 Contribuição
-
-Gostou do projeto? Sinta-se à vontade para sugerir melhorias ou reportar problemas.
-
----
-
-## 📞 Contato
-
-Para dúvidas ou sugestões, entre em contato com os desenvolvedores. Estamos abertos a feedbacks para melhorar a experiência sustentável de nossos usuários.
-
----
-
 **Obrigado por utilizar o Ecora! Vamos juntos construir um futuro mais sustentável. 🌱**
