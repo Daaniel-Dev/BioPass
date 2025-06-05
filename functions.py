@@ -1,5 +1,4 @@
 import json
-
 from classes import *
 
 
@@ -44,17 +43,25 @@ def cadastro_nome():
 def abrir_arquivo_json(nome):
     while True:
         try:
-            with open(f'{nome}.json', 'r') as arquivo:
+            with open(f'database/{nome}.json', 'r', encoding='utf-8') as arquivo:
                 dados = json.load(arquivo)
                 return dados
         except FileNotFoundError:
-            with open(f'{nome}.json', 'w') as arquivo:
+            with open(f'database/{nome}.json', 'w', encoding='utf-8') as arquivo:
                 json.dump([], arquivo)
                 continue
         except json.JSONDecodeError:
-            with open(f'{nome}.json', 'w') as arquivo:
+            with open(f'database/{nome}.json', 'w') as arquivo:
                 json.dump([], arquivo)
                 continue
+
+
+def editar_arquivo_json_objeto(objeto, nome):
+    dados = abrir_arquivo_json(nome)
+    dados.append(objeto.dados())
+    with open(f'database/{nome}.json', 'w', encoding='utf-8') as arquivo:
+        json.dump(dados, arquivo, indent=1)
+
 
 def cadastro_cpf():
     def calcular_digito(cpf_inf, digito1=True):
@@ -77,12 +84,13 @@ def cadastro_cpf():
             dv_calculado = str(primeiro_digito) + str(segundo_digito)
             if dv_informado == dv_calculado:
                 dados = abrir_arquivo_json('dados')
-                for dado in dados:
-                    if cpf == dado['cpf']:
-                        print('\033[31;1mCPF já cadastrado. Tente outro.\033[m')
-                        break
-                else:
-                    return cpf
+                for usuario in dados:
+                    for dado in usuario:
+                        if cpf == dado['cpf']:
+                            print('\033[31;1mCPF já cadastrado. Tente outro.\033[m')
+                            break
+                    else:
+                        return cpf
             else:
                 print('\033[31;1mCPF inválido. Tente novamente.\033[m')
 
@@ -103,57 +111,80 @@ def cadastro_usuario():
     senha = cadastro_senha()
     nome = cadastro_nome()
     usuario = User(cpf, senha, nome)
-    dados_usuario = abrir_arquivo_json('dados')
-    dados_usuario.append(usuario.dados())
-    with open(f'dados.json', 'w') as arquivo:
-        json.dump(dados_usuario, arquivo, indent=2)
+    editar_arquivo_json_objeto(usuario, 'dados')
     print('\033[32;1mCadastro concluído com sucesso!\033[m')
 
 
-# Falta criar uma função para cada cadastro para deixar o código mais limpo
 def cadastrar_produto(usuario):
-    while True:
-        nome = input('Nome do produto: ').strip().title()
-        pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou digitar outro nome?')
-        if pergunta == 1:
-            continue
-        descricao = input('Descrição do produto: ').strip()
-        pergunta = menu(['CONTINUAR', 'DIGITAR OUTRA'], 'Deseja continuar ou digitar outra descrição?')
-        if pergunta == 1:
-            continue
-        else:
-            break
-    while True:
-        try:
-            preco = float(input('Preço do produto (R$): ').replace(',', '.'))
-            pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO', 'Deseja continuar ou digitar outro preço?'])
-            if pergunta == 1:
+    def cadastro_nome_produto():
+        while True:
+            n = input('Nome do produto: ').strip().title()
+            preg = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou digitar outro nome?')
+            if preg == 1:
                 continue
             else:
-                break
-        except ValueError:
-            print('\033[31;1mValor inválido. Tente novamente\033[m')
-    while True:
-        try:
-            quantidade = int(input('Unidades do produto: '))
-        except ValueError:
-            print('\033[31;Valor inválido. Tente novamente\033[m')
-    while True:
-        url_video = input('Link do vídeo (opcional): ').strip()
-        if not url_video:
-            url_video = 'Não informado'
-        else:
-            pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou informar outro URL?')
-            if pergunta == 1:
+                return n
+
+
+    def cadastro_descricao_produto():
+        while True:
+            desc = input('Descrição do produto: ').strip()
+            perg = menu(['CONTINUAR', 'DIGITAR OUTRA'], 'Deseja continuar ou digitar outra descrição?')
+            if perg == 1:
                 continue
             else:
-                break
+                return desc
+
+
+    def cadastro_preco_produto():
+        while True:
+            try:
+                prec = float(input('Preço do produto (R$): ').replace(',', '.'))
+                perg = menu(['CONTINUAR', 'DIGITAR OUTRO', 'Deseja continuar ou digitar outro preço?'])
+                if perg == 1:
+                    continue
+                else:
+                    return prec
+            except ValueError:
+                print('\033[31;1mValor inválido. Tente novamente\033[m')
+
+
+    def cadastro_quantidade_produto():
+        while True:
+            try:
+                quant = int(input('Unidades do produto: '))
+            except ValueError:
+                print('\033[31;Valor inválido. Tente novamente\033[m')
+            perg = menu(['CONTINUAR', 'DIGITAR OUTRA'], 'Deseja continuar ou digitar outra quantidade?')
+            if perg == 1:
+                continue
+            else:
+                return quant
+
+
+    def cadastro_url_produto():
+        while True:
+            url = input('Link do vídeo (opcional): ').strip()
+            if not url:
+                'Não informado'
+            else:
+                pergunta = menu(['CONTINUAR', 'DIGITAR OUTRO'], 'Deseja continuar ou informar outro URL?')
+                if pergunta == 1:
+                    continue
+                else:
+                    return url
+
+    nome = cadastro_nome_produto()
+    preco = cadastro_preco_produto()
+    quantidade = cadastro_quantidade_produto()
+    descricao = cadastro_descricao_produto()
+    url_video = cadastro_url_produto()
     produto = Produto(usuario['cpf'], usuario['nome'], nome, preco, quantidade, descricao, url_video)
     dados_produto = abrir_arquivo_json('produtos')
     dados_produto.append(produto.dados())
     with open(f'produtos.json', 'w') as arquivo:
         json.dump(dados_produto, arquivo, indent=2)
-    print('\033[32;1mProduto cadastrado com sucesso!\033[m')    
+    print('\033[32;1mProduto cadastrado com sucesso!\033[m')
 
 
 def listar_produtos_disponiveis():
@@ -161,15 +192,28 @@ def listar_produtos_disponiveis():
     if not lista_produtos:
         print('Nenhum produto disponível.')
     else:
-        for i, prod in enumerate(lista_produtos, start=1):
-            print(f'\nProduto [{i}]:\n')
-            for chave, elemento in prod.items():
-                print(f'{chave.upper()}: {elemento}')
-
-
+        for produto in lista_produtos:
+            for caracteristicas in produto:
+                if caracteristicas["quantidade"] >= 1:
+                    titulo(f'Produto {caracteristicas["id"]}', '-')
+                    print(f'''Vendedor: {caracteristicas["nome do vendedor"]}
+    Produto: {caracteristicas["nome do produto"]}
+    Preço {caracteristicas['preço']}
+    Descrição: {caracteristicas['descrição']}
+    Quantidade: {caracteristicas['quantidade']}
+    URL: {caracteristicas["url"]}\n''')
 
 
 def comprar_produto():
+    def percorrer_lista(lista, esc, acao):
+        for produto in lista:
+            for detalhes in produto:
+                if esc == detalhes["id"]:
+                    if acao == 1:
+                        return detalhes
+                    elif acao == 2:
+                        detalhes["quantidade"] -= 1
+                        return lista
     lista_produtos = abrir_arquivo_json('produtos')
     if not lista_produtos:
         print('Nenhum produto disponível.')
@@ -181,13 +225,17 @@ def comprar_produto():
             print('Compra cancelada.')
             return
         if 1 <= escolha <= len(lista_produtos):
-            produto = lista_produtos[escolha - 1]
-            print(f'Você escolheu: {produto['nome do produto']} - R${produto['preço']}')
+            produto_escolhido = percorrer_lista(lista_produtos, escolha, 1)
+            print(f'Você escolheu: {produto_escolhido["nome do produto"]} - '
+                  f'R${produto_escolhido["preço"]}')
             confirmar = input('Deseja comprar? (S/N): ').strip().upper()
             if confirmar == 'S':
                 cartao = input('Digite o número do cartão (fictício): ')
                 print(f'Compra aprovada no cartão {cartao}!')
-                print(f'Obrigado por comprar {produto['nome do produto']}!')
+                print(f'Obrigado por comprar {produto_escolhido["nome do produto"]}!')
+                nova_lista = percorrer_lista(lista_produtos, escolha, 2)
+                with open('database/produtos.json', 'w') as arquivo:
+                    json.dump(nova_lista, arquivo, indent=1)
             else:
                 print('Compra cancelada.')
         else:
@@ -198,15 +246,15 @@ def comprar_produto():
 
 def funcao_depoimentos():
     while True:
-        dados_depoimentos = abrir_arquivo_json('depoimentos')
         escolha = menu(['Adicionar Depoimento', 'Ver Depoimentos', 'Voltar'], 'Escolha uma opção:')
         if escolha == 0:
             nome = input('Seu nome: ').strip().title()
             comentario = input('Seu depoimento: ').strip()
             if comentario:
+                dados_depoimentos = abrir_arquivo_json('depoimentos')
                 dados_depoimentos.append({"nome": nome, "comentario": comentario})
-                with open(f'depoimentos.json', 'w') as arquivo:
-                    json.dump(dados_depoimentos, arquivo, indent=2)
+                with open(f'database/depoimentos.json', 'w') as arquivo:
+                    json.dump(dados_depoimentos, arquivo, indent=1)
                 print('Depoimento adicionado com sucesso!')
             else:
                 print('Depoimento não pode ser vazio.')
@@ -223,14 +271,14 @@ def funcao_depoimentos():
 
 def video_educacional():
     while True:
-        dados_video_educacional = abrir_arquivo_json('video_educacional')
         escolha = menu(['Adicionar Link', 'Ver Links', 'Voltar'], 'Escolha uma opção:')
         if escolha == 0:
             link = input('Cole o link do seu vídeo educacional: ').strip()
             if link:
+                dados_video_educacional = abrir_arquivo_json('video_educacional')
                 dados_video_educacional.append(link)
-                with open('video_educacional') as arquivo:
-                    json.dump(dados_video_educacional, arquivo, indent=2)
+                with open('database/video_educacional') as arquivo:
+                    json.dump(dados_video_educacional, arquivo, indent=1)
                 print('Link adicionado com sucesso!')
             else:
                 print('Link não pode estar vazio.')
@@ -265,9 +313,10 @@ def login_usuario():
         cpf = login_cpf()
         senha = login_senha()
         dados = abrir_arquivo_json('dados')
-        for dado in dados:
-            if cpf == dado['cpf'] and senha == dado['senha']:
-                return dado
+        for usuario in dados:
+            for dado in usuario:
+                if cpf == dado['cpf'] and senha == dado['senha']:
+                    return dado
         print(f'\033[31;1mConta não encontrada ou os dados foram solicitados incorretamente. Tente novamente.\033[m')
         opcao = menu(['Continuar', 'Voltar'], 'O que deseja fazer?')
         if opcao == 0:
