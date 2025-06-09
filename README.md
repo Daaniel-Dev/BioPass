@@ -1,86 +1,83 @@
-# Ecora - Seu Marketplace Sustentável
+BioPass - Seu Marketplace de Produtos Sustentáveis
+Descrição
+O BioPass é um sistema de marketplace desenvolvido em Python, que opera via console. Ele foi projetado para ser uma plataforma onde os usuários podem comprar e vender produtos com um foco em sustentabilidade. O sistema inclui funcionalidades completas de gerenciamento de usuários e produtos, um processo de compra simulado e seções interativas para depoimentos e compartilhamento de conteúdo educacional, promovendo uma comunidade engajada com práticas sustentáveis.
 
-Bem-vindo ao **Ecora**, um aplicativo de marketplace focado na sustentabilidade, ajudando vendedores e consumidores a se conectarem de forma consciente.
+Funcionalidades
+O sistema oferece um conjunto robusto de funcionalidades para os usuários:
 
----
+Gerenciamento de Usuários
+Cadastro: Permite que novos usuários criem uma conta com nome, CPF e senha. O sistema inclui uma validação para o formato do CPF.
 
-## 📖 Sobre o Projeto
+Login: Usuários já cadastrados podem acessar a plataforma de forma segura.
 
-O objetivo do **Ecora** é proporcionar um ambiente seguro e simples onde pequenos e grandes vendedores possam divulgar e vender seus produtos de forma sustentável. Oferece funcionalidades para:
+Alteração de Cadastro: Usuários podem atualizar suas informações pessoais, como nome, senha e até mesmo o CPF.
 
-- Cadastrar produtos sustentáveis.
-- Comprar produtos disponibilizados na plataforma.
-- Adicionar vídeos educativos sobre reutilização ou descarte consciente.
-- Deixar depoimentos e compartilhar experiências.
-- Aprender mais sobre sustentabilidade com nossa seção de vídeos educacionais.
+Exclusão de Conta: Oferece a opção para que um usuário exclua sua conta e todos os dados associados a ela de forma permanente.
 
----
+Gerenciamento de Produtos
+Cadastro de Produtos: Vendedores podem adicionar produtos à venda, especificando nome, descrição, preço, quantidade em estoque e, opcionalmente, um link de vídeo.
 
-## 🚀 Funcionalidades
+Listagem de Produtos: Todos os usuários podem ver os produtos disponíveis. Vendedores têm uma visão filtrada para gerenciar apenas os seus próprios itens.
 
-### 👤 **Usuários**
-- **Cadastro de Usuários**: Realizado usando CPF, nome e senha. A validação do CPF é feita para garantir autenticidade.
-- **Login**: Acesso seguro com CPF e senha.
+Alteração de Produtos: Vendedores podem editar os detalhes de seus produtos já cadastrados.
 
-### 🛍️ **Produtos**
-- **Cadastro de Produtos**: 
-  - Nome
-  - Descrição
-  - Preço
-  - Quantidade disponível
-  - Link de vídeo (opcional)
-- **Listagem de Produtos Disponíveis**: Consulte produtos cadastrados na plataforma.
-- **Compra de Produtos**: Sistema simples para adquirir produtos, simulando uma transação com cartão.
+Exclusão de Produtos: Permite que vendedores removam seus produtos da plataforma.
 
-### ✨ **Recursos Extras**
-- **Depoimentos**: Adicione feedback e veja o que outros usuários pensam sobre a plataforma.
-- **Vídeos Educacionais**:
-  - Adicione links de vídeos para promover práticas sustentáveis.
-  - Consulte os links adicionados.
+Processo de Compra
+Comprar Produto: Usuários podem navegar pela lista de produtos e realizar uma compra. O sistema impede que um vendedor compre seus próprios produtos.
 
----
+Simulação de Pagamento: O processo de compra inclui uma etapa de pagamento fictício com cartão de crédito para simular uma transação real.
 
-## 💻 Tecnologias Utilizadas
+Controle de Estoque: A quantidade de um produto é automaticamente abatida do estoque após uma compra ser finalizada.
 
-- **Python**: Lógica principal do programa.
-- **JSON**: Armazenamento de dados de usuários, produtos, depoimentos, e vídeos de forma persistente.
+Comunidade e Educação
+Depoimentos: Uma seção onde os usuários podem deixar seus comentários e feedback sobre a plataforma, além de ver os depoimentos de outros.
 
----
+Vídeos Educacionais: Um espaço para compartilhar e visualizar links de vídeos sobre sustentabilidade e práticas ecológicas.
 
-## 📋 Pré-requisitos
+Como Executar o Projeto
+Para colocar o BioPass em funcionamento, siga os passos abaixo.
 
-Antes de executar o programa, garanta que você tenha:
-- **Python 3.13** ou superior instalado.
-- Biblioteca Python padrão de entrada/saída (como `json`).
+Pré-requisitos:
 
----
+Ter o Python 3 instalado em sua máquina.
 
-## ▶️ Como Executar
+(Opcional para Windows) Habilitar Suporte a Cores no Terminal:
+O aplicativo utiliza cores para melhorar a legibilidade e a experiência do usuário. Se você estiver usando o Windows e as cores não forem exibidas corretamente no Prompt de Comando, pode ser necessário habilitar o suporte a terminais virtuais. Para fazer isso, abra o Prompt de Comando (cmd) e execute o seguinte comando uma única vez:
 
-1. Clone ou baixe o repositório para sua máquina.
-2. Certifique-se de ter os arquivos `main.py`, `functions.py` e `classes.py` no mesmo diretório.
-3. Execute o aplicativo a partir do arquivo `main.py`:
+reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1
 
-```shell script
+Estrutura de Arquivos:
+
+Certifique-se de que todos os arquivos (main.py, functions.py, classes.py) estão no mesmo diretório.
+
+Crie uma pasta chamada database neste mesmo diretório. É nesta pasta que o sistema irá criar e armazenar os arquivos de dados (.json).
+
+/seu-projeto
+|-- database/
+|-- classes.py
+|-- functions.py
+`-- main.py
+
+Execução:
+
+Abra um terminal ou prompt de comando.
+
+Navegue até o diretório onde os arquivos do projeto estão localizados.
+
+Execute o comando a seguir para iniciar a aplicação:
+
 python main.py
-```
 
+Interação:
 
-4. Siga as instruções interativas no terminal para explorar o sistema.
+Após a execução, o menu principal do BioPass será exibido no console. Siga as instruções na tela para navegar pelas diferentes opções.
 
----
+Estrutura do Código
+O projeto está organizado em três arquivos principais:
 
-## 🗂 Estrutura
+main.py: É o ponto de entrada da aplicação. Ele é responsável por apresentar o menu principal e controlar o fluxo de navegação do usuário, orquestrando as chamadas para as outras funções do sistema.
 
-- **main.py**: Arquivo principal que inicia o programa e conecta as funcionalidades.
-- **functions.py**: Contém as principais funções do programa, como menus, cadastro, manipulação de arquivos e lógica de funcionamento.
-- **classes.py**: Define as classes `User` (usuário) e `Produto` (produto), que estruturam os dados no sistema.
-- **Arquivos JSON**:
-  - `dados.json`: Armazena dados de usuários cadastrados.
-  - `produtos.json`: Contém informações dos produtos cadastrados.
-  - `depoimentos.json`: Registra depoimentos dos usuários.
-  - `video_educacional.json`: Lista de links de vídeos educacionais.
+functions.py: Este arquivo é o cérebro do sistema. Ele contém toda a lógica para as funcionalidades, incluindo cadastro, login, manipulação de produtos, o processo de compra e as funções de interação com a comunidade. Também gerencia a leitura e escrita dos arquivos JSON que funcionam como banco de dados.
 
----
-
-**Obrigado por utilizar o Ecora! Vamos juntos construir um futuro mais sustentável. 🌱**
+classes.py: Define as estruturas de dados fundamentais do projeto. Contém as classes User e Produto, que modelam os usuários e os produtos, respectivamente, garantindo uma organização de dados clara e coesa.
