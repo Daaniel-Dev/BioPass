@@ -21,7 +21,7 @@ O BioPass foi criado para facilitar a conexão entre pessoas preocupadas com o m
 
 2. No Windows, abra o **Prompt de Comando (cmd)**, navegue até a pasta onde copiou os arquivos usando o comando:
    ```cmd
-   cd caminho\para\pasta\Ecora
+   cd caminho\para\pasta\BioPass
    ```
 
 3. **(Opcional, recomendado para exibição de cores no terminal):**  
