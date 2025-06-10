@@ -6,7 +6,7 @@
 
 ## Problema Abordado
 
-Consumidores preocupados com o meio ambiente frequentemente enfrentam dificuldades para encontrar produtos sustentáveis e fornecedores confiáveis. Ao mesmo tempo, pequenos produtores sustentáveis têm pouco alcance digital. O BioPass resolve esse problema ao conectar esses dois públicos de forma prática e acessível, mesmo sem interface gráfica.
+Consumidores preocupados com o meio ambiente frequentemente enfrentam dificuldades para encontrar produtos sustentáveis e fornecedores confiáveis. Ao mesmo tempo, pequenos produtores sustentáveis têm pouco alcance digital. O BioPass resolve esse problema ao conectar esses dois públicos de forma prática e acessível.
 
 ---
 
