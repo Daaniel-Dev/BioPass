@@ -12,8 +12,6 @@ Consumidores preocupados com o meio ambiente frequentemente enfrentam dificuldad
 
 ## Como Funciona
 
-O programa é executado via terminal e oferece as seguintes funcionalidades:
-
 ### Para todos os usuários
 - Cadastro e login por **CPF** e senha
 - Alteração e exclusão de conta
