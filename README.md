@@ -30,9 +30,9 @@ O BioPass foi criado para facilitar a conexão entre pessoas preocupadas com o m
    reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1
    ```
 
-4. Execute o arquivo principal:
+4. Execute o arquivo principal escrevendo esse comando no diretório dos arquivos:
    ```cmd
    python main.py
    ```
 
-> Certifique-se de ter o Python instalado em seu computador.
+> Certifique-se de ter o Python 3.13+ instalado em seu computador.
