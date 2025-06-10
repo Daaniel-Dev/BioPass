@@ -213,9 +213,6 @@ URL: {produto["url"]}\n''')
     return lista_produtos
 
 
-
-
-
 def comprar_produto(usuario):
     def percorrer_lista_produtos(lista, esc, acao, esc_quant=1):
         for produto in lista:
