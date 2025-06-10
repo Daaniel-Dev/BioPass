@@ -1,0 +1,62 @@
+[
+ {
+  "cpf": "12345678901",
+  "id": 1,
+  "nome do vendedor": "Ana Clara",
+  "nome do produto": "Sabonete Vegano",
+  "preço": 14.9,
+  "quantidade": 25,
+  "descrição": "Feito com óleos essenciais naturais",
+  "url": "https://youtube.com/sabonete"
+ },
+ {
+  "cpf": "98765432100",
+  "id": 2,
+  "nome do vendedor": "Lucas Mendes",
+  "nome do produto": "Ecobag de Algodão",
+  "preço": 9.5,
+  "quantidade": 0,
+  "descrição": "Ecobag resistente e reutilizável",
+  "url": "https://youtube.com/ecobag"
+ },
+ {
+  "cpf": "12345678901",
+  "id": 3,
+  "nome do vendedor": "Ana Clara",
+  "nome do produto": "Escova de Bambu",
+  "preço": 7.0,
+  "quantidade": 15,
+  "descrição": "Alternativa ecológica às escovas plásticas",
+  "url": ""
+ },
+ {
+  "cpf": "55566677788",
+  "id": 4,
+  "nome do vendedor": "Pedro Lima",
+  "nome do produto": "Canudo Inox",
+  "preço": 5.5,
+  "quantidade": 10,
+  "descrição": "Canudo reutilizável de aço inox",
+  "url": "https://youtu.be/canudoinox"
+ },
+ {
+  "cpf": "55566677788",
+  "id": 5,
+  "nome do vendedor": "Pedro Lima",
+  "nome do produto": "Canudo Inox",
+  "preço": 5.5,
+  "quantidade": 0,
+  "descrição": "Produto duplicado com estoque zerado",
+  "url": ""
+ },
+ {
+  "cpf": "99988877766",
+  "id": 6,
+  "nome do vendedor": "Sofia Martins",
+  "nome do produto": "Composteira Caseira",
+  "preço": 120.0,
+  "quantidade": 2,
+  "descrição": "Sistema compacto de compostagem para apartamentos",
+  "url": "https://vimeo.com/composteira"
+ }
+]

@@ -1,0 +1,37 @@
+[
+ {
+  "cpf": "12345678901",
+  "senha": "verde@123",
+  "nome": "Ana Clara"
+ },
+ {
+  "cpf": "98765432100",
+  "senha": "eco2024",
+  "nome": "Lucas Mendes"
+ },
+ {
+  "cpf": "11122233344",
+  "senha": "sustentavel!",
+  "nome": "Mariana Souza"
+ },
+ {
+  "cpf": "55566677788",
+  "senha": "natureza#1",
+  "nome": "Pedro Lima"
+ },
+ {
+  "cpf": "99988877766",
+  "senha": "planet@verde",
+  "nome": "Sofia Martins"
+ },
+ {
+  "cpf": "33322211100",
+  "senha": "reuso321",
+  "nome": "Carlos Henrique"
+ },
+ {
+  "cpf": "15766040474",
+  "senha": "daniel123",
+  "nome": "Daniel"
+ }
+]
