@@ -90,13 +90,13 @@ def cadastro_senha():
     while True:
         senha = input('Digite uma senha: ').strip()
         if not senha.replace('@', '').isalnum():
-            print('\033[31;1mCaractere(s) inválido(s). Tente novamente.\033[m')
+            print('\033[31;1mCaractere(s) inválido(s), só é aceito o arroba (@). Tente novamente.\033[m')
             continue
         confirm = input('Confirme sua senha: ').strip()
         if senha == confirm:
             return senha
         else:
-            print('\003[31;1mAs senhas não conferem. Tente novamente.\033[m')
+            print('\033[31;1mAs senhas não conferem. Tente novamente.\033[m')
 
 
 def cadastro_usuario():
@@ -169,10 +169,11 @@ def cadastro_url_produto():
 
 
 def cadastro_id_produto(dados):
-    if dados:
-        index_ult_prod = dados.index(dados[-1])
-        return index_ult_prod + 2
-    else:
+    ids = [produto["id"] for produto in dados] if dados else []
+    if ids:
+        maior_id = max(ids)
+        return maior_id + 1
+    elif not ids:
         return 1
 
 
@@ -212,20 +213,23 @@ URL: {produto["url"]}\n''')
     return lista_produtos
 
 
-def percorrer_lista(lista, esc, acao, esc_quant=1):
-    for produto in lista:
-        if esc == produto["id"]:
-            if acao == 1:
-                return produto
-            elif acao == 2:
-                if esc_quant <= produto["quantidade"]:
-                    produto["quantidade"] -= esc_quant
-                else:
-                    print('\033[31;1mErro na compra. Quantidade solicitada maior que o estoque.\033[m')
-                return lista
+
 
 
 def comprar_produto(usuario):
+    def percorrer_lista_produtos(lista, esc, acao, esc_quant=1):
+        for produto in lista:
+            if esc == produto["id"]:
+                if acao == 1:
+                    return produto
+                elif acao == 2:
+                    if esc_quant <= produto["quantidade"]:
+                        produto["quantidade"] -= esc_quant
+                    else:
+                        print('\033[31;1mErro na compra. Quantidade solicitada maior que o estoque.\033[m')
+                    return lista
+
+
     lista_produtos = abrir_arquivo_json('produtos')
     if not lista_produtos:
         print('Nenhum produto disponível.')
@@ -238,7 +242,7 @@ def comprar_produto(usuario):
                 print('\033[31;1mCompra cancelada.\033[m')
                 return
             if 1 <= escolha <= len(lista_produtos):
-                produto_escolhido = percorrer_lista(lista_produtos, escolha, 1)
+                produto_escolhido = percorrer_lista_produtos(lista_produtos, escolha, 1)
                 if produto_escolhido["cpf"] == usuario["cpf"]:
                     print('\033[31;1mVocê não pode comprar seu próprio produto.\033[m')
                     continue
@@ -247,10 +251,13 @@ def comprar_produto(usuario):
                 confirmar = input('Deseja comprar? (S/N): ').strip().upper()
                 if confirmar == 'S':
                     esc_quantidade = int(input('Deseja comprar quantas unidades? '))
+                    if esc_quantidade > produto_escolhido['quantidade']:
+                        print('\033[31;1mQuantidade maior que o estoque. Tente novamente.\033[m')
+                        continue
                     cartao = input('Digite o número do cartão (fictício): ')
                     print(f'\033[32;1mCompra aprovada no cartão {cartao}!\033[m')
                     print(f'Obrigado por comprar {produto_escolhido["nome do produto"]}!')
-                    nova_lista = percorrer_lista(lista_produtos, escolha, 2, esc_quantidade)
+                    nova_lista = percorrer_lista_produtos(lista_produtos, escolha, 2, esc_quantidade)
                     with open('database/produtos.json', 'w', encoding='utf8') as arquivo:
                         json.dump(nova_lista, arquivo, indent=1)
                 else:
@@ -288,18 +295,25 @@ def funcao_depoimentos(usuario):
 
 
 def video_educacional():
+    dados_video_educacional = abrir_arquivo_json('video_educacional')
     while True:
         escolha = menu(['Adicionar Link', 'Ver Links', 'Voltar'], 'Escolha uma opção:')
         if escolha == 0:
             link = input('Cole o link do seu vídeo educacional: ').strip()
             if link:
-                dados_video_educacional = abrir_arquivo_json('video_educacional')
+                link_existente = False
+                for link_dados in dados_video_educacional:
+                    if link_dados.find(link) != -1:
+                        link_existente = True
+                        print('\033[31;1mLink já cadastrado no sistema. Tente novamente.\033[m')
+                if link_existente:
+                    continue
                 dados_video_educacional.append(link)
-                with open('database/video_educacional', 'w') as arquivo:
+                with open('database/video_educacional.json', 'w') as arquivo:
                     json.dump(dados_video_educacional, arquivo, indent=1)
-                print('Link adicionado com sucesso!')
+                print('\033[32;1mLink adicionado com sucesso!\033[m')
             else:
-                print('Link não pode estar vazio.')
+                print('\033[31;1mLink não pode estar vazio.\033[m')
         elif escolha == 1:
             if not dados_video_educacional:
                 print('Nenhum link cadastrado.')
@@ -314,7 +328,7 @@ def video_educacional():
 
 def login_cpf():
     while True:
-        cpf = str(input('Digite seu CPF: ')).strip().replace('.', '')
+        cpf = str(input('Digite seu CPF: ')).strip().replace('.', '').replace('-', '')
         if len(cpf) != 11 or not cpf.isnumeric():
             print('\033[31;1mCPF inválido. É necessário 11 dígitos numéricos.\033[m')
         else:
@@ -385,7 +399,7 @@ def alterar_cadastro_usuario(usuario):
                     if produto["cpf"] == usuario["cpf"]:
                         produtos.remove(produto)
                 with open('database/produtos.json', 'w', encoding='utf-8') as arquivo:
-                    json.dump(dados,arquivo, indent=1)
+                    json.dump(produtos,arquivo, indent=1)
                 print('\033[32;1mConta excluida com sucesso!\033[m')
                 return 'Conta excluída'
             elif conf == 1:
@@ -402,8 +416,8 @@ def alterar_cadastro_produto(usuario):
             json.dump(produtos, ARQUIVO, indent=1)
 
 
+    produtos_usuario = listar_produtos_disponiveis(usuario, True)
     while True:
-        produtos_usuario = listar_produtos_disponiveis(usuario, True)
         produtos = abrir_arquivo_json('produtos')
         if not produtos_usuario:
             print('Você não possui produtos cadastrados.')
@@ -413,7 +427,7 @@ def alterar_cadastro_produto(usuario):
             escolha = int(input('Digite o ID do produto para alterar suas informações (0 para voltar):  '))
             if escolha in lista_id:
                 menu_opcoes = ['Nome do produto', 'Descrição', 'Preço', 'Quantidade', 'URL', 'Voltar', 'Excluir produto']
-                opcoes = menu(menu_opcoes, 'O que deseja alterar')
+                opcoes = menu(menu_opcoes, 'O que deseja alterar?')
                 if opcoes == 0:
                     nome_novo = cadastro_nome_produto()
                     inf_alterar_produto('nome do produto', nome_novo)
@@ -432,14 +446,20 @@ def alterar_cadastro_produto(usuario):
                 elif opcoes == 5:
                     break
                 elif opcoes == 6:
-                    for produto in produtos:
-                        if produto["cpf"] == usuario["cpf"] and escolha == produto["id"]:
-                            produtos.remove(produto)
-                    with open('database/produtos.json', 'w', encoding='utf-8') as arquivo:
-                        json.dump(produtos, arquivo, indent=1)
-                        print('\033[32;1mProduto excluído com sucesso.\033[m')
-                        return 'Produto excluído'
+                    conf = menu(['Sim', 'Não'], 'Tem certeza de que deseja excluir esse produto? '
+                                                '(Essa ação é irreversível)')
+                    if conf == 0:
+                        for produto in produtos:
+                            if produto["cpf"] == usuario["cpf"] and escolha == produto["id"]:
+                                produtos.remove(produto)
+                        with open('database/produtos.json', 'w', encoding='utf-8') as arquivo:
+                            json.dump(produtos, arquivo, indent=1)
+                            print('\033[32;1mProduto excluído com sucesso!\033[m')
+                    elif conf == 1:
+                        continue
                 print(f'\033[32;1m{menu_opcoes[opcoes]} alterado(a) com sucesso!\033[m')
+            if escolha == 0:
+                break
             else:
                 print('\033[31;1mID Inválido. Tente novamente.\033[m')
         except ValueError:
