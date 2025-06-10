@@ -78,7 +78,7 @@ BioPass/
 │   ├── dados.json
 │   ├── produtos.json
 │   ├── depoimentos.json
-│   └── video_educacional
+│   └── video_educacional.json
 ```
 
 ---
