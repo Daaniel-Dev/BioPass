@@ -10,10 +10,9 @@ O BioPass foi criado para facilitar a conexão entre pessoas preocupadas com o m
 
 - Cadastro de consumidores e vendedores
 - Catálogo de produtos sustentáveis
-- Busca e filtragem de produtos por categoria
-- Sistema de avaliações e feedbacks
+- Sistema de feedback
 - Painel do vendedor para gerenciamento de produtos
-- Informações educativas sobre práticas sustentáveis
+- Vídeos educativos sobre práticas sustentáveis
 
 ## Instalação
 
