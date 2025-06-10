@@ -22,13 +22,12 @@ try:
                 elif opcao2 == 2:
                     cadastrar_produto(usuario)
                 elif opcao2 == 3:
-                    usuario_cadastro = alterar_cadastro_usuario(usuario)
-                    if usuario == 'Conta excluída':
+                    resultado_cadastro_usuario = alterar_cadastro_usuario(usuario)
+                    if resultado_cadastro_usuario == 'Conta excluída':
+                        usuario = None
                         break
                 elif opcao2 == 4:
-                    produto_cadastro = alterar_cadastro_produto(usuario)
-                    if produto_cadastro == 'Produto excluído':
-                        break
+                    alterar_cadastro_produto(usuario)
                 elif opcao2 == 5:
                     funcao_depoimentos(usuario)
                 elif opcao2 == 6:
