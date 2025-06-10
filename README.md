@@ -32,8 +32,6 @@ Os dados são armazenados em arquivos JSON, simulando persistência em um sistem
 
 ## Conceitos Aplicados
 
-O projeto demonstra domínio de vários tópicos de programação:
-
 - **Modularização:** Separação clara entre `main.py`, `functions.py` e `classes.py`
 - **Programação orientada a objetos:** Classes `User` e `Produto` com encapsulamento de atributos
 - **Manipulação de arquivos:** Leitura e escrita de dados em arquivos `.json` simulando um banco de dados
