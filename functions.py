@@ -455,6 +455,7 @@ def alterar_cadastro_produto(usuario):
                         with open('database/produtos.json', 'w', encoding='utf-8') as arquivo:
                             json.dump(produtos, arquivo, indent=1)
                             print('\033[32;1mProduto excluído com sucesso!\033[m')
+                            break
                     elif conf == 1:
                         continue
                 print(f'\033[32;1m{menu_opcoes[opcoes]} alterado(a) com sucesso!\033[m')
