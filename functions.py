@@ -263,7 +263,7 @@ def comprar_produto(usuario):
                     print('\033[31;1mCompra cancelada.\033[m')
                     return
             else:
-                print('\033[31;1mProduto não encontrado.\033[m')
+                print('\033[31;1mProduto não encontrado ou fora de estoque.\033[m')
         except ValueError:
             print('\033[31;1mEntrada inválida.\033[m')
 
