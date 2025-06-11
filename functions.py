@@ -231,6 +231,7 @@ def comprar_produto(usuario):
 
 
     lista_produtos = listar_produtos_disponiveis(usuario)
+    lista_ids = [produtos["id"] for produtos in lista_produtos]
     if not lista_produtos:
         print('Nenhum produto disponível.')
         return
@@ -240,7 +241,7 @@ def comprar_produto(usuario):
             if escolha == 0:
                 print('\033[31;1mCompra cancelada.\033[m')
                 return
-            if 1 <= escolha <= len(lista_produtos):
+            if escolha in lista_ids:
                 produto_escolhido = percorrer_lista_produtos(lista_produtos, escolha, 1)
                 if produto_escolhido["cpf"] == usuario["cpf"]:
                     print('\033[31;1mVocê não pode comprar seu próprio produto.\033[m')
@@ -261,7 +262,7 @@ def comprar_produto(usuario):
                         json.dump(nova_lista, arquivo, indent=1)
                 else:
                     print('\033[31;1mCompra cancelada.\033[m')
-                    return
+                    continue
             else:
                 print('\033[31;1mProduto não encontrado ou fora de estoque.\033[m')
         except ValueError:
