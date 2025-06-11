@@ -460,8 +460,9 @@ def alterar_cadastro_produto(usuario):
                         continue
                 print(f'\033[32;1m{menu_opcoes[opcoes]} alterado(a) com sucesso!\033[m')
             elif escolha not in lista_id:
-                print('\033[31;1mID Inválido. Tente novamente.\033[m')
-            elif escolha == 0:
-                break
+                if escolha == 0:
+                    break
+                else:
+                    print('\033[31;1mID Inválido. Tente novamente.\033[m')
         except ValueError:
             print('\033[31;1mEntrada inválida.\033[m')
