@@ -230,11 +230,10 @@ def comprar_produto(usuario):
                     return lista
 
 
-    lista_produtos = abrir_arquivo_json('produtos')
+    lista_produtos = listar_produtos_disponiveis(usuario)
     if not lista_produtos:
         print('Nenhum produto disponível.')
         return
-    listar_produtos_disponiveis(usuario)
     while True:
         try:
             escolha = int(input('Digite o ID do produto que deseja comprar (0 para cancelar): '))
