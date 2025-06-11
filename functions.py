@@ -145,6 +145,9 @@ def cadastro_quantidade_produto():
     while True:
         try:
             quant = int(input('Unidades do produto: '))
+            if quant < 0:
+                print('\033[31;1mValor abaixo de zero. Tente novamente.\033[m')
+                continue
         except ValueError:
             print('\033[31;1mValor inválido. Tente novamente\033[m')
             continue
