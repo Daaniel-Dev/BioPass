@@ -197,16 +197,16 @@ def cadastrar_produto(usuario):
 
 
 def listar_produtos_disponiveis(usuario, filtro=False):
-    lista_produtos = abrir_arquivo_json('produtos')
+    produtos = abrir_arquivo_json('produtos')
+    lista_produtos = [produto for produto in produtos if produto["quantidade"] > 0]
     if filtro:
         lista_produtos = [produto for produto in lista_produtos if usuario["cpf"] == produto["cpf"]]
     if not lista_produtos:
         print('Nenhum produto disponível.')
     if lista_produtos:
         for indice, produto in enumerate(lista_produtos, start=1):
-            if produto["quantidade"] >= 1:
-                    titulo(f'Produto {indice}', '-')
-                    print(f'''ID: {produto['id']}
+            titulo(f'Produto {indice}', '-')
+            print(f'''ID: {produto['id']}
 Vendedor: {produto["nome do vendedor"]}
 Produto: {produto["nome do produto"]}
 Preço: R$ {produto['preço']:.2f}
