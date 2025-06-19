@@ -78,3 +78,12 @@ BioPass/
 ```
 
 ---
+
+## Team
+
+- Arthur Alexandre
+- Ludmilla Arlane
+- Wesley Telles
+- Júlio Augusto
+- Marcelo Bezerra
+
