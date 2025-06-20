@@ -81,6 +81,7 @@ BioPass/
 
 ## Team
 
+- Daniel Gonçalves
 - Arthur Alexandre
 - Ludmilla Arlane
 - Wesley Telles
